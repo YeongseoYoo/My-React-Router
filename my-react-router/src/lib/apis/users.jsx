@@ -4,7 +4,7 @@ import instance from './base';
 export const signUp = async (email, password, nickname) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        const response = await instance.post('/signup', { email, password, nickname });
+        const response = await instance.post('/users/signup', { email, password, nickname });
         return response;
     } catch (error) {
         throw error;
@@ -27,7 +27,7 @@ export const login = async (email, password) => {
 export const logout = async () => {
     // eslint-disable-next-line no-useless-catch
     try {
-        const response = await instance.all('/logout');
+        const response = await instance.all('/users/logout');
         return response;
     } catch (error) {
         throw error;

@@ -1,18 +1,30 @@
 import axios from "axios";
-const BASE_URL = "/api/";
 
+const BASE_URL = "/api/";
 const instance = axios.create({
-    baseURL: BASE_URL,
+  baseURL: BASE_URL,
 });
 
+instance.interceptors.request.use(
+  function (config) {
+    // request처리 로직 (header 등)
+    return config;
+  },
+  function (error) {
+    // 요청 오류시 처리 로직
+    return Promise.reject(error);
+  }
+);
+
 instance.interceptors.response.use(
-    function(response){
-        return response.data;
-},
-    function (error) {
-        if (error.response.status ===500) {
-            //예외처리 코드
-        }
-    }
-)
+  function (response) {
+    // response처리 로직
+    return response;
+  },
+  function (error) {
+    // error처리 로직
+    return Promise.reject(error);
+  }
+);
+
 export default instance;

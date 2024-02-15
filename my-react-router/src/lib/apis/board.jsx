@@ -4,12 +4,12 @@ import instance from './base';
 // 게시판 목록을 가져오는 함수
 export const fetchBoardList = async () => {
     try {
-        const response = await instance.get("board");
+        const response = await instance.get('/board');
         console.log(response);
         return response
     } catch (err) {
         console.error('Error fetching board list:', err);
-        return [];
+ return [];
     }
 };
 

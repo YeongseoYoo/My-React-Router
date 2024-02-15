@@ -33,7 +33,7 @@ export const mainRouter = [
           ],
         },
         {
-            path: '/signin',
+            path: '/login',
             element: <SignInPage />,
             index: true,
         },

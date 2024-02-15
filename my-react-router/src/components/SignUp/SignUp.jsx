@@ -15,7 +15,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh', backgroundColor: '#f2f2f2' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh' }}>
       <h2 style={{ fontFamily: 'Comic Sans MS', marginBottom: '30px' }}>Sign Up</h2>
       <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>

@@ -9,10 +9,11 @@ import AuthProvider from "./components/AuthProvider";
 
 function App() {
   return (
-    <RouterProvider router={mainRouter}>
-      <BoardListPage />
-      
-    </RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={mainRouter}>
+        <BoardListPage />
+      </RouterProvider>
+    </AuthProvider>
   );
 
 }

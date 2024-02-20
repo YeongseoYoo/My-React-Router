@@ -1,16 +1,37 @@
-import React, {createContext, useState} from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
-export default function AuthProvider( { children }) {
+const AUTH_KEY = "AUTH_USER";
+
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const clientLogin = (user) => {
-    if(user.token){
-      setUser(user)
-      sessionStorage.setItem("user", json.stringfy(user));
+
+  useEffect(() => {
+    const userStr = sessionStorage.getItem(AUTH_KEY);
+    if (userStr) {
+      setUser(JSON.parse(userStr));
     }
-  };
-  return <AuthProvider value={{user, clientLogin}}>
-    { children }
-  </AuthProvider>
+  }, []);
+
+  const clientLogin = useCallback((user) => {
+    setUser(user);
+    sessionStorage.setItem(AUTH_KEY, JSON.stringify(user));
+  }, []);
+  const clientLogout = useCallback(() => {
+    setUser(null);
+    sessionStorage.removeItem(AUTH_KEY);
+  }, []);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        clientLogin,
+        clientLogout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }

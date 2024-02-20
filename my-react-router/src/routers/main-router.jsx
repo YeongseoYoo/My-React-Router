@@ -1,51 +1,66 @@
-import * as React from "react";
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import MainPage from "~/routes/page";
-import BoardListPage from "~/routes/board/page";
-import BoardLayout from "~/routes/layout";
-import BoardDetailPage from "~/routes/board/detail/page";
-import SignUpPage from "~/components/SignUp/SignUp";
-import SignInPage from "~/components/SignIn/SignIn";
+
+import boardRouter from "./board-router";
+import campaignRouter from "./campaign-router";
+
+import CampaignListPage from "~/routes/wadiz/page";
+// import BoardListPage from "~/routes/board/page";
+// import BoardWritePage from "~/routes/board/write/page";
+// import BoardDetailPage from "~/routes/board/detail/page";
+import Layout from "~/routes/layout";
+// import SignInPage from "~/routes/signin/page";
+// import SignUpPage from "~/routes/signup/page";
 
 export const mainRouter = [
-    {
-      path: "",
-      element: <BoardLayout />,
-      children: [
-        {
-          path: "",
-          index: true,
-          element: <MainPage />,
-        },
-        {
-          path: "/board",
-          children: [
-            {
-              path: "",
-              element: <BoardListPage />,
-              index: true,
-            },
-            {
-              path: ":boardId",
-              element: <BoardDetailPage />,
-              index: true,
-            },
-          ],
-        },
-        {
-            path: '/login',
-            element: <SignInPage />,
+  {
+    path: "",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        index: true,
+        element: <MainPage />,
+      },
+      // {
+      //   path: "/signin",
+      //   element: <SignInPage />,
+      //   index: true,
+      // },
+      // {
+      //   path: "/signup",
+      //   element: <SignUpPage />,
+      //   index: true,
+      // },
+      {
+        path: "/campaign",
+        children: [
+          {
+            path: "",
+            element: <CampaignListPage />,
             index: true,
-        },
-        {
-            path: '/signup',
-            element: <SignUpPage />,
-            index: true,
-        },
+          },
+          // {
+          //   path: "write",
+          //   element: <BoardWritePage />,
+          //   index: true,
+          // },
+          // {
+          //   path: ":boardId/edit",
+          //   element: <BoardWritePage />,
+          //   index: true,
+          // },
+          // {
+          //   path: ":boardId",
+          //   element: <BoardDetailPage />,
+          //   index: true,
+          // },
+        ],
+      },
+    ],
+  },
+];
+const router = createBrowserRouter(mainRouter);
 
-      ],
-    },
-  ];
-  const router = createBrowserRouter(mainRouter);
-  
-  export default router;
+export default router;

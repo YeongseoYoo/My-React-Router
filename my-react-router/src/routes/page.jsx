@@ -1,13 +1,15 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { Container } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import { ThemeContext } from "~/components/ThemeProvider";
 
 export default function MainPage() {
-    // const location = useLocation();
-    // console.log(location);
-    return (
-        <div>
-            <h1>This is my MainPage</h1>
-            <p>MainPage입니다.</p>
-        </div>
-    );
+  const location = useLocation();
+  const context = useContext(ThemeContext);
+  return (
+    <Container className="min-vh-100">
+      <h1>MainPage</h1>
+      <p>This is my mainpage.</p>
+    </Container>
+  );
 }

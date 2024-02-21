@@ -57,30 +57,33 @@ export default function MyNavbar({ brandTitle, offCanvasTitle = undefined }) {
                   </Link>
                 </>
               ) : (
-                // <Link
-                //   to="/logout"
-                //   className="text-decoration-none flex-grow-1 text-center border border-dark border-end-0"
-                // >
-                <Nav.Link
-                  as="div"
-                  className=""
-                  onClick={() => {
-                    clientLogout();
-                    logout().then((resp) => { });
-                  }}
+                <Link
+                  to="/logout"
+                  className="text-decoration-none flex-grow-1 text-center border border-dark border-end-0"
                 >
-                  로그아웃
-                </Nav.Link>
-                // </Link>
+                  <Nav.Link
+                    as="div"
+                    className=""
+                    onClick={() => {
+                      clientLogout();
+                      logout().then((resp) => { });
+                    }}
+                  >
+                    로그아웃
+                  </Nav.Link>
+                </Link>
               )}
             </Nav>
             <Nav className="justify-content-start flex-grow-1 pe-3">
-              {/* <Link to="/" className="text-decoration-none">
+              <Link to="/" className="text-decoration-none">
                 <Nav.Link as="div">Home</Nav.Link>
               </Link>
               <Link to="/board" className="text-decoration-none">
                 <Nav.Link as="div">게시판</Nav.Link>
-              </Link> */}
+              </Link>
+              <Link to="/todo" className="text-decoration-none">
+                <Nav.Link as="div">TODO</Nav.Link>
+              </Link>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

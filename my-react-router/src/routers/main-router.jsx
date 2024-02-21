@@ -3,15 +3,14 @@ import { createBrowserRouter } from "react-router-dom";
 import MainPage from "~/routes/page";
 
 import boardRouter from "./board-router";
-import campaignRouter from "./campaign-router";
 
-import CampaignListPage from "~/routes/wadiz/page";
-// import BoardListPage from "~/routes/board/page";
-// import BoardWritePage from "~/routes/board/write/page";
-// import BoardDetailPage from "~/routes/board/detail/page";
+import BoardListPage from "~/routes/board/page";
+import BoardWritePage from "~/routes/board/write/page";
+import BoardDetailPage from "~/routes/board/detail/page";
 import Layout from "~/routes/layout";
-// import SignInPage from "~/routes/signin/page";
-// import SignUpPage from "~/routes/signup/page";
+import SignInPage from "~/routes/signin/page";
+import SignUpPage from "~/routes/signup/page";
+import TodoPage from "~/routes/todo/page";
 
 export const mainRouter = [
   {
@@ -23,39 +22,44 @@ export const mainRouter = [
         index: true,
         element: <MainPage />,
       },
-      // {
-      //   path: "/signin",
-      //   element: <SignInPage />,
-      //   index: true,
-      // },
-      // {
-      //   path: "/signup",
-      //   element: <SignUpPage />,
-      //   index: true,
-      // },
       {
-        path: "/campaign",
+        path: "/signin",
+        element: <SignInPage />,
+        index: true,
+      },
+      {
+        path: "/signup",
+        element: <SignUpPage />,
+        index: true,
+      },
+      {
+        path: "/todo",
+        element: <TodoPage />,
+        index: true,
+      },
+      {
+        path: "/board",
         children: [
           {
             path: "",
-            element: <CampaignListPage />,
+            element: <BoardListPage />,
             index: true,
           },
-          // {
-          //   path: "write",
-          //   element: <BoardWritePage />,
-          //   index: true,
-          // },
-          // {
-          //   path: ":boardId/edit",
-          //   element: <BoardWritePage />,
-          //   index: true,
-          // },
-          // {
-          //   path: ":boardId",
-          //   element: <BoardDetailPage />,
-          //   index: true,
-          // },
+          {
+            path: "write",
+            element: <BoardWritePage />,
+            index: true,
+          },
+          {
+            path: ":boardId/edit",
+            element: <BoardWritePage />,
+            index: true,
+          },
+          {
+            path: ":boardId",
+            element: <BoardDetailPage />,
+            index: true,
+          },
         ],
       },
     ],

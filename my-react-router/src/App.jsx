@@ -1,21 +1,21 @@
-import * as React from "react";
+import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
-import mainRouter from "./routers/main-router";
-import BoardListPage from "./routes/board/page";
-import BoardDetailPage from "./routes/board/detail/page";
+import router from "./routers/main-router";
+import ThemeProvider from "./components/ThemeProvider";
 import AuthProvider from "./components/AuthProvider";
-
-// import './App.css'
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={mainRouter}>
-        <BoardListPage />
-      </RouterProvider>
-    </AuthProvider>
+    <>
+      <Provider store={store}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </Provider>
+    </>
   );
-
 }
 
-export default App
+export default App;

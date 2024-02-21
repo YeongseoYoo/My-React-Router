@@ -1,20 +1,38 @@
 const myMiddleware = (store) => (next) => (action) => {
-  // 리듀서에 전달되기전 로직
-  let result = next(action); //return 결과에 따라서 새로운 상태 update가 될 수 있다. 
-  if (result === "Succcess") {
-    store.dispatch({ //상태변화를 처음부터 간다는 것
-      type: "todo/success", //dispatch안에는 action객체
+  /**
+   * next: dispatch (다음 미들웨어 혹은 다음 리듀서 실행)
+   * action: 컴포넌트로부터 전달받은 action
+   * store:
+   *    - getState() # 현재 state객체 접근하는 함수
+   *    - dispatch() # dispatch 하는 함수
+   */
+
+  let result = next(action);
+  if (result === "Success") {
+    store.dispatch({
+      type: "todo/success",
       payload: {},
     });
-  }else {
+  } else {
     store.dispatch({
       type: "todo/fail",
       payload: {},
     });
   }
-}
 
-//store.dispatch는 처음부터 다시
+  // 리듀서에서 변경된 state를 활용한 로직
+};
+const mymid2 = function (store) {
+  return function (next) {
+    return function (action) {
+      console.log(store);
+      console.log(next);
+      console.log(action);
+
+      next(action);
+    };
+  };
+};
 
 export function myMid(store) {
   console.log("store", store);
@@ -30,14 +48,10 @@ export function myMid(store) {
 /**
  * timeout
  */
-
-//앞에서부터 middleware통과하고 timeout에 오게 된다.
-//meta에 delay값이 있었다.
 export const timeoutScheduler = (store) => (next) => (action) => {
   if (!action.meta || !action.meta.delay) {
     return next(action);
   }
-  //delay 값이 있다면
   let timeoutId = setTimeout(() => {
     return next(action);
   }, action.meta.delay);

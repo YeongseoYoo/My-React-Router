@@ -59,7 +59,7 @@ export default function TodoPage() {
     action.meta = {
       delay: 5000,
     };
-    const cancelFn = dispatch(action);  //next가 아니라 또 다른 상태 update가 될 때 실행되는 함수
+    const cancelFn = dispatch(action);
     setUndo(() => cancelFn);
 
     // setTodoList(newTodoList)

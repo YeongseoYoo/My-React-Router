@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Sample from "~/components/Sample";
-import { fetchBoardList } from "~/store/reducers/board";
+import { fetchBoardList } from "~/store/reducers/board"; 
 import { useSelector, useDispatch } from "react-redux";
 
 export default function MainPage() {
@@ -16,6 +16,7 @@ export default function MainPage() {
 
   return (
     <Container className="min-vh-100">
+
       <h1>MainPage</h1>
       <p>This is my mainpage.</p>
       <Sample />

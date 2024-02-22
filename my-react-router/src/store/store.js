@@ -1,4 +1,5 @@
 import { combineReducers, createStore } from "redux";
+import boardReducer from "./reducers/board";
 import todoReducer from "./reducers/todo";
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
@@ -15,7 +16,6 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import boardReducer from "./reducers/board";
 
 const rootPersistConfig = {
   key: "root",

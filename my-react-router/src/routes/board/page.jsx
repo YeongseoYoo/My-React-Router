@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Button, Container, ListGroup } from "react-bootstrap";
 
-import { fetchBoardList } from "~/lib/apis/board";
+import { fetchBoardList } from "~/store/reducers/board";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 
 const brand = "My-React-Board";
+
 export default function BoardListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // http://localhost:5173/board?where=news&query=무역전쟁
-
+  const dispatch = useDispatch();
+  const boardObj = useSelector((state) => state.board);
   console.log(searchParams);
   console.log(searchParams.getAll("where"));
   console.log(searchParams.getAll("query"));
   console.log(setSearchParams);
 
-  const [boardList, setBoardList] = useState([]);
+  const { loading, boards } = boardObj; //boardObj reducer 폴더내의 board.js에서 내가 선언한 initialState 에서 boards 배열을 꺼내놓은 것.
+
   useEffect(() => {
-    fetchBoardList().then((data) => {
-      setBoardList(data);
-      // console.log(data);
-    });
-  }, []);
+    const action = fetchBoardList();
+    dispatch(action);
+  }, [dispatch]);
+
 
   return (
     <Container className="min-vh-100">
@@ -41,7 +42,7 @@ export default function BoardListPage() {
       </div>
 
       <ListGroup as="ul">
-        {boardList.map((item) => (
+        {boards.map((item) => (
           <Link
             key={item._id}
             to={`/board/${item._id}`}
@@ -59,16 +60,15 @@ export default function BoardListPage() {
               </div>
               <div className="d-flex flex-column justify-content-center align-items-end">
                 <Badge bg="primary" pill>
-                  {/* 14 */}
                   {item.commentCount}
                 </Badge>
                 <div>{item.author.nickname}</div>
-                {/* {item.createdAt} */}
               </div>
             </ListGroup.Item>
           </Link>
         ))}
       </ListGroup>
+
     </Container>
   );
 }

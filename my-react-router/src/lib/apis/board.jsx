@@ -5,8 +5,7 @@ import instance from './base';
 export const fetchBoardList = async () => {
     try {
         const response = await instance.get('/board');
-        console.log(response.data);
-        return response.data
+        return response
     } catch (err) {
         console.error('Error fetching board list:', err);
         return [];
